@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+		{{ super() }}
+		<style type="text/css">
+				.important { color: #336699; }
+		</style>
+{% endblock %}
+{% block content %}
+
+
+<div class='container'>
+	<div class='columns'>
+
+		<div class='column col-12'>
+			<!-- <objects/> -->
+
+			{% for dummy in dummy_objects %}
+				<p>{{dummy.id}} : {{dummy.a_number}} : {{dummy.a_boolean}} : {{dummy.some_text}}</p>
+			{% endfor %}
+		</div>
+
+	</div>
+</div>
+
+
+
+<div class='container'>
+	<div class='columns'>
+
+		<div class='column col-12'>
+			{% for dummy in dummy_files %}
+				<p> {{dummy.id}} : {{dummy.filename}}</p>
+				<img src="{{ url_for('uploaded_file', filename=dummy.filename) }}" width=120 height=120>
+			{% endfor %}
+		</div>
+
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	var image_root = window.location.origin + "{{ url_for('uploaded_file', filename='') }}"
+</script>
+
+
+
+
+
+{% endblock %}
+
+{% block footer_js %}
+	<script>
+		riot.mount('objects')
+	</script>
+{% endblock %}

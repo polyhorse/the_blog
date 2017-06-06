@@ -1,0 +1,9 @@
+server {
+    listen 80;
+    server_name 138.197.201.80;
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/home/server/kiosk_prototype/server/server.sock;
+    }
+}
