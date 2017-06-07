@@ -6,6 +6,8 @@ import random, string
 # import flickrapi
 import flask_restless
 
+from flask_migrate import Migrate
+
 #########################################
 ################ INIT ###################
 #########################################
@@ -18,6 +20,8 @@ def create_app():
 	db.init_app(app)
 	with app.app_context():
 		db.create_all()
+	#migrations init
+	migrate = Migrate(app, db)
 	#API - is for IOT, or mobile
 	from models import DummyObject, DummyFile
 	manager = flask_restless.APIManager(app, flask_sqlalchemy_db=db)
@@ -37,9 +41,9 @@ def create_app():
 	#DASHBOARD - is for customer login pages
 	#I'll have to make that custom
 
-	return app
+	return app, migrate
 
-app = create_app()
+app, migrate = create_app()
 
 
 #########################################
