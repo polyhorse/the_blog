@@ -35,6 +35,9 @@ http://pythonhosted.org/Flask-Themes/
 https://pypi.python.org/pypi/Flask-Mail 
 this was included with flask-user-->
 
+flask-ask (amazon alexa)
+http://flask-ask.readthedocs.io/en/latest/
+
 flask-classy
 http://pythonhosted.org/Flask-Classy/
 
@@ -46,3 +49,16 @@ http://flask-migrate.readthedocs.io/en/latest/
 
 flask-script
 http://flask-script.readthedocs.io/en/latest/
+
+twilio
+https://www.twilio.com/blog/2016/09/how-to-receive-and-respond-to-a-text-message-with-python-flask-and-twilio.html
+
+
+
+
+
+
+
+
+
+

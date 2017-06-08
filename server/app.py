@@ -1,12 +1,10 @@
 import os
-# import json
 from flask import Flask, request, render_template, redirect, url_for, jsonify, send_from_directory
 from werkzeug.utils import secure_filename
 import random, string
-# import flickrapi
 import flask_restless
-
 from flask_migrate import Migrate
+from flask_user import login_required
 
 #########################################
 ################ INIT ###################
@@ -15,13 +13,22 @@ def create_app():
 	#APP init
 	app = Flask(__name__)
 	app.config.from_object('config.DevelopmentConfig')
+	#MAIL init
+	from flask_mail import Mail
+	mail = Mail(app)
 	#DATABASE init
 	from models import db
 	db.init_app(app)
-	with app.app_context():
-		db.create_all()
-	#migrations init
+	#MIGRATIONS init
 	migrate = Migrate(app, db)
+	with app.app_context():
+		#User init
+		from flask_user import SQLAlchemyAdapter, UserManager
+		from users import User
+		db_adapter = SQLAlchemyAdapter(db, User)
+		user_manager = UserManager(db_adapter, app)
+		#db finalization
+		db.create_all()
 	#API - is for IOT, or mobile
 	from models import DummyObject, DummyFile
 	manager = flask_restless.APIManager(app, flask_sqlalchemy_db=db)
@@ -30,17 +37,15 @@ def create_app():
 	#ADMIN - is for basic crud for trained users
 	from admin import admin
 	admin.init_app(app)
-
+	#upload example
 	from flask_admin.contrib.fileadmin import FileAdmin
 	path = os.path.join(os.path.dirname(__file__), app.config['UPLOAD_FOLDER'])
 	admin.add_view(FileAdmin(path, '/uploads/', name='Uploads'))
-
+	#sqlmodel example
 	from flask_admin.contrib.sqla import ModelView
 	admin.add_view(ModelView(DummyObject, db.session))
-
 	#DASHBOARD - is for customer login pages
 	#I'll have to make that custom
-
 	return app, migrate
 
 app, migrate = create_app()
@@ -103,6 +108,11 @@ def upload():
 	#if GET
 	files = DummyFile.query.all()
 	return render_template('upload.html', files=files)
+
+@app.route('/auth_test')
+@login_required
+def auth_test():
+	return 'Hello'
 
 #########################################
 ############# UTILITY ###################
