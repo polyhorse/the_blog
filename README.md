@@ -28,8 +28,8 @@ http://flask-sse.readthedocs.io/en/latest/
 <!-- flask-user
 http://pythonhosted.org/Flask-User/ -->
 
-flask-themes
-http://pythonhosted.org/Flask-Themes/
+<!-- flask-themes2
+http://flask-themes2.readthedocs.io/en/latest/ -->
 
 <!-- flask-mail
 https://pypi.python.org/pypi/Flask-Mail 
@@ -53,7 +53,8 @@ http://flask-script.readthedocs.io/en/latest/
 twilio
 https://www.twilio.com/blog/2016/09/how-to-receive-and-respond-to-a-text-message-with-python-flask-and-twilio.html
 
-
+flask-uploads
+http://pythonhosted.org/Flask-Uploads/
 
 
 

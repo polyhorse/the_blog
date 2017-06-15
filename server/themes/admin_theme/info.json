@@ -1,0 +1,9 @@
+{
+    "application": "app", 
+    "identifier": "admin_theme", 
+    "name": "Admin Theme", 
+    "author": "itsjesseyo",
+    "license": "MIT/X11",
+    "version": "1.0",
+    "description": "Basic starterkit theme for logged in super-users - like devs and sys admins - NOT customers or members"
+}

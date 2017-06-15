@@ -5,6 +5,7 @@ import random, string
 import flask_restless
 from flask_migrate import Migrate
 from flask_user import login_required
+from flask_themes2 import Themes, render_theme_template, get_theme, get_themes_list
 
 #########################################
 ################ INIT ###################
@@ -13,6 +14,8 @@ def create_app():
 	#APP init
 	app = Flask(__name__)
 	app.config.from_object('config.DevelopmentConfig')
+	#THEMES init
+	Themes(app, app_identifier='app')
 	#MAIL init
 	from flask_mail import Mail
 	mail = Mail(app)
@@ -54,25 +57,27 @@ app, migrate = create_app()
 #########################################
 ############## ROUTES ###################
 #########################################
+from models import DummyObject, DummyFile
 
 ############## INDEX ###################
 @app.route("/")
 def index():
 	dummy_objects = DummyObject.query.all()
 	dummy_files = DummyFile.query.all()
-	print(dummy_objects)
-	print(dummy_files)
-	return render_template('index.html', dummy_objects=dummy_objects, dummy_files=dummy_files)
+	# print(dummy_objects)
+	# print(dummy_files)
+	return render_theme_template(get_current_theme(), 'index.html', dummy_objects=dummy_objects, dummy_files=dummy_files)
+	# return render_template('index.html', dummy_objects=dummy_objects, dummy_files=dummy_files)
 
-############## CRUD ###################
-@app.route("/crud", methods=['GET', 'POST'])
-def crud():
-	if request.method == 'POST':
-		#WTFORMS crud example
-		pass
-	#return this if get
-	dummy_objects = DummyObject.query.all()
-	return render_template('crud.html', dummy_objects=dummy_objects)
+# ############## CRUD ###################
+# @app.route("/crud", methods=['GET', 'POST'])
+# def crud():
+# 	if request.method == 'POST':
+# 		#WTFORMS crud example
+# 		pass
+# 	#return this if get
+# 	dummy_objects = DummyObject.query.all()
+# 	return render_template('crud.html', dummy_objects=dummy_objects)
 
 ############## FILE UPLOAD ###################
 @app.route('/upload', methods=['GET', 'POST'])
@@ -127,6 +132,17 @@ def randomword(length):
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
 	return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
+def get_current_theme():
+	# if g.user is not None:
+	# 	ident = g.user.theme
+	# else:
+	# 	ident = current_app.config.get('DEFAULT_THEME', 'plain')
+	themes = get_themes_list()
+	print 'here'
+	print themes
+	theme = app.config['HOMEPAGE_THEME']
+	return get_theme(theme)
 
 
 

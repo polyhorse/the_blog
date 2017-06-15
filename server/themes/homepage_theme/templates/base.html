@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+			{% block head %}
+				<!-- MOBILE APP Meta -->
+<!-- 				<meta name="apple-mobile-web-app-capable" content="yes">
+				<meta name="mobile-web-app-capable" content="yes">
+				<meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> -->
+
+				  <!-- Standard Meta -->
+				  <meta charset="utf-8" />
+				  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+				  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+				<!--We share these between themes-->
+<!-- 				<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/spectre.min.css') }}">
+				<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/spectre-exp.min.css') }}">
+				<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/spectre-icons.min.css') }}">
+				<link rel="stylesheet" href="{{ theme_static('css/style.css') }}" /> -->
+
+				<!--semantic=ui css-->
+				<link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
+				<!-- custom styles-->
+				<link rel="stylesheet" href="{{ theme_static('css/style.css') }}" /> 
+
+
+<!-- my fonts-->
+<!-- 				<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i" rel="stylesheet"> -->
+
+
+				<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/blaze/1.2.1/blaze.min.css" />
+				<script src="https://cdn.jsdelivr.net/riotgear/latest/rg.min.js"></script>-->
+				
+
+				<title>{% block title %}web app starterkit{% endblock %}</title>
+			{% endblock %}
+
+			{% block head_js %}
+
+			{% endblock %}
+
+			<!-- fetch polyfill -->
+			<script src="{{ url_for('static', filename='js/fetch.js') }}"></script>
+			<!-- tiny json api helper -->
+			<script src="{{ url_for('static', filename='js/index.min.js') }}"></script>
+			<!-- include riot.js and the compiler -->
+			<script src="https://cdn.jsdelivr.net/riot/3.2/riot+compiler.min.js"></script>
+
+
+			<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+
+			<!-- semantic-ui js-->
+			<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+			
+
+	</head>
+	<body>
+
+		{% block pre_pusher %}
+		{% endblock %}
+
+		<div class='pusher'>
+			<header class='navbar'>
+				{% block header %}
+
+				{% endblock %}
+			</header>
+
+			<main class="main pusher">
+				{% block main %}
+
+				{% endblock %}
+			</main>
+
+			<footer class='footer'>
+				{% block footer %}
+
+				{% endblock %}
+			</footer>	
+		</div>	
+		
+		
+		<!--utils-->
+		<script type="text/javascript">
+			//
+			var image_root = window.location.origin + "{{ url_for('uploaded_file', filename='') }}"
+
+			var get_json = function(url, callback) {
+					var xhr = new XMLHttpRequest();
+					xhr.open('GET', url, true);
+					xhr.responseType = 'json';
+					xhr.onload = function() {
+						var status = xhr.status;
+						if (status == 200) {
+							callback(null, xhr.response);
+						} else {
+							callback(status);
+						}
+					};
+					xhr.send();
+			};
+
+			function compare_order(a,b) {
+				if (a.order < b.order)
+					return 1;
+				if (a.order > b.order)
+					return -1;
+				return 0;
+			}
+		</script>
+
+		<!--riot tags-->
+		{% block riot_tags %}
+
+		{% endblock %}
+		<!--footer js-->
+		{% block footer_js %}
+
+		{% endblock %}
+
+
+	</body>
+</html>

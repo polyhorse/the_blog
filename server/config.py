@@ -18,6 +18,11 @@ class Config(object):
 	MAIL_USE_TLS = False
 	#flask-user setting
 	USER_APP_NAME = 'MyApp'
+	#flask-themes2 settings
+	THEME_PATHS = ['themes']
+	HOMEPAGE_THEME = 'homepage_theme'
+	ADMIN_THEME = 'admin_theme'
+	MEMBER_THEME = 'member_theme'
 
 # class ProductionConfig(Config):
 

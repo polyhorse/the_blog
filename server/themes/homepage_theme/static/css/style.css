@@ -1,0 +1,52 @@
+/*header.navbar{
+	background-color: red;
+	width: 100%;
+}
+header.navbar div.container{
+	width:1020px;
+	max-width: 100%;
+	min-width: 768px;
+	margin: 0 auto;
+	padding: 25px 0px;
+	
+}
+header.navbar div.container section{
+	display: inline-block;
+	vertical-align: middle;
+}
+header.navbar div.container section h3{
+	display: inline-block;
+	padding: 0px;
+	margin: 0px;
+	color: white;
+	background-color: blue;
+}
+header.navbar div.container section.main_menu{
+	margin-right: 0px;
+	margin-left: auto;
+	float: right;
+}
+header.navbar div section a{
+	padding: 30px 15px 10px;
+}
+
+main.main{
+	background-color: blue;
+	width:100%;
+}
+main.main div.container{
+	width:1020px;
+	max-width: 100%;
+	min-width: 768px;
+	margin: 0 auto;
+}
+main.main div.container div.columns div.column{
+	background-color: yellow;
+	border: 1px solid black;
+}
+
+footer.footer{
+	background-color: green;
+	width:100%;
+}*/
+
