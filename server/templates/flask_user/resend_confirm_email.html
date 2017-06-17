@@ -1,0 +1,13 @@
+{% extends 'flask_user/public_base.html' %}
+
+{% block content %}
+{% from "flask_user/_macros.html" import render_field, render_submit_field %}
+<h1 class='ui inverted header'>{%trans%}Resend Confirmation Email{%endtrans%}</h1>
+
+<form action="" method="POST" class="ui form error user" role="form">
+    {{ form.hidden_tag() }}
+    {{ render_field(form.email, label_visible=false, my_icon='lock', tabindex=240) }}
+    {{ render_submit_field(form.submit, tabindex=90) }}
+</form>
+
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends 'flask_user/public_base.html' %}
+
+{% block content %}
+{% from "flask_user/_macros.html" import render_field, render_checkbox_field, render_submit_field %}
+<h1 class='ui inverted header'>{%trans%}Sign in{%endtrans%}</h1>
+
+
+<form action="" method="POST" class="ui large form error" role="form">
+	<div class="ui stacked segment">
+			{{ form.hidden_tag() }}
+
+			{# Username or Email field #}
+			{% set field = form.username if user_manager.enable_username else form.email %}
+			<!-- <div class="form-group {% if field.errors %}has-error{% endif %}"> -->
+<!-- 									{% if user_manager.enable_register and not user_manager.require_invitation %}
+											<a href="{{ url_for('user.register') }}" tabindex='190'>
+													{%trans%}New here? Register.{%endtrans%}</a>
+									{% endif %} -->
+					<!-- {{ field(class_='form-control', tabindex=110) }} -->
+
+
+					
+					<div class="field {% if field.errors %}error{% endif %}">
+						<div class="ui left icon input">
+							<i class="user icon"></i>
+							{{ field(class_='form-control', placeholder=field.label.text, tabindex=110) }}
+						</div>
+					</div>
+
+
+
+					{% if field.errors %}
+							{% for e in field.errors %}
+									<!-- <p class="help-block">{{ e }}</p> -->
+									<div class="ui error message">
+										<!-- <div class="header">Action Forbidden</div> -->
+										<p>{{ e }}</p>
+									</div>
+							{% endfor %}
+					{% endif %}
+			<!-- </div> -->
+
+			<div class='ui horizontal divider'></div>
+
+			{# Password field #}
+			{% set field = form.password %}
+			<div class="form-group {% if field.errors %}has-error{% endif %}">
+					{# Label on left, "Forgot your Password?" on right #}
+									{% if user_manager.enable_forgot_password %}
+											<a href="{{ url_for('user.forgot_password') }}" tabindex='195'>
+													{%trans%}Forgot your Password?{%endtrans%}</a>
+									{% endif %}
+					
+
+					<div class="field {% if field.errors %}error{% endif %}">
+						<div class="ui left icon input">
+							<i class="lock icon"></i>
+							{{ field(class_='form-control', placeholder=field.label.text, tabindex=120) }}
+						</div>
+					</div>
+
+					
+
+					{% if field.errors %}
+							{% for e in field.errors %}
+									<!-- <p class="help-block">{{ e }}</p> -->
+									<div class="ui error message">
+										<!-- <div class="header">Action Forbidden</div> -->
+										<p>{{ e }}</p>
+									</div>
+							{% endfor %}
+					{% endif %}
+			</div>
+
+			<br>
+			{# Remember me #}
+			{% if user_manager.enable_remember_me %}
+			{{ render_checkbox_field(login_form.remember_me, tabindex=130) }}
+			{% endif %}
+
+			<div class='ui horizontal divider'></div>
+
+
+			{# Submit button #}
+			{{ render_submit_field(form.submit, tabindex=180) }}
+
+		</div>
+		<div class="ui error message"></div>
+</form>
+
+<div class="ui message">
+			New here? <a href="/register">Sign Up</a>
+		</div>
+
+{% endblock %}

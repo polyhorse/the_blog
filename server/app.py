@@ -40,6 +40,9 @@ def create_app():
 	#ADMIN - is for basic crud for trained users
 	from admin import admin
 	admin.init_app(app)
+	#MEMBER VIEWS
+	from member import MemberView
+	MemberView.register(app)
 	#upload example
 	from flask_admin.contrib.fileadmin import FileAdmin
 	path = os.path.join(os.path.dirname(__file__), app.config['UPLOAD_FOLDER'])
@@ -118,6 +121,8 @@ def upload():
 @login_required
 def auth_test():
 	return 'Hello'
+
+
 
 #########################################
 ############# UTILITY ###################

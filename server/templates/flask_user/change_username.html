@@ -1,0 +1,14 @@
+{% extends 'flask_user/member_base.html' %}
+
+{% block content %}
+{% from "flask_user/_macros.html" import render_field, render_submit_field %}
+<h1 class='ui inverted header'>{%trans%}Change username{%endtrans%}</h1>
+
+<form action="" method="POST" class="ui form error" role="form">
+    {{ form.hidden_tag() }}
+    {{ render_field(form.new_username, label_visible=false, my_icon='user', tabindex=10) }}
+    {{ render_field(form.old_password, label_visible=false, my_icon='lock', tabindex=20) }}
+    {{ render_submit_field(form.submit, tabindex=90) }}
+</form>
+
+{% endblock %}

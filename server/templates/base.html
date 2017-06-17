@@ -2,16 +2,180 @@
 <html lang="en">
 <head>
 		{% block head %}
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+			<meta name="apple-mobile-web-app-capable" content="yes">
+			<meta name="mobile-web-app-capable" content="yes">
+			<meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		
-				<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/spectre.min.css') }}">
-				<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/spectre-exp.min.css') }}">
-				<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/spectre-icons.min.css') }}">
-				<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+			<!--semantic=ui css-->
+			<link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
 
-				<title>{% block title %}{% endblock %} - My Webpage</title>
+			<title>{% block title %}{% endblock %} - My Webpage</title>
+
+
+
+
+			<style type="text/css">
+				.hidden.menu {
+					display: none;
+				}
+
+				.masthead.segment {
+					min-height: 700px;
+					padding: 1em 0em;
+				}
+				.masthead .logo.item img {
+					margin-right: 1em;
+				}
+				.masthead .ui.menu .ui.button {
+					margin-left: 0.5em;
+				}
+				.masthead h1.ui.header {
+					margin-top: 3em;
+					margin-bottom: 0em;
+					font-size: 4em;
+					font-weight: normal;
+				}
+				.masthead h2 {
+					font-size: 1.7em;
+					font-weight: normal;
+				}
+
+				.ui.vertical.stripe {
+					padding: 7em 0em;
+				}
+				.ui.vertical.stripe h3 {
+					font-size: 2em;
+				}
+				.ui.vertical.stripe .button + h3,
+				.ui.vertical.stripe p + h3 {
+					margin-top: 3em;
+				}
+				.ui.vertical.stripe .floated.image {
+					clear: both;
+				}
+				.ui.vertical.stripe p {
+					font-size: 1.33em;
+				}
+				.ui.vertical.stripe .horizontal.divider {
+					margin: 3em 0em;
+				}
+
+				.quote.stripe.segment {
+					padding: 0em;
+				}
+				.quote.stripe.segment .grid .column {
+					padding-top: 5em;
+					padding-bottom: 5em;
+				}
+
+				.footer.segment {
+					padding: 5em 0em;
+				}
+
+				.secondary.pointing.menu .toc.item {
+					display: none;
+				}
+
+				@media only screen and (max-width: 700px) {
+					.ui.fixed.menu {
+						display: none !important;
+					}
+					.secondary.pointing.menu .item,
+					.secondary.pointing.menu .menu {
+						display: none;
+					}
+					.secondary.pointing.menu .toc.item {
+						display: block;
+					}
+					.masthead.segment {
+						min-height: 350px;
+					}
+					.masthead h1.ui.header {
+						font-size: 2em;
+						margin-top: 1.5em;
+					}
+					.masthead h2 {
+						margin-top: 0.5em;
+						font-size: 1.5em;
+					}
+				}
+
+				.ui.secondary.inverted.pointing.menu{
+					border-width: 0px;
+				}
+
+				.ui.inverted.teal.segment{
+					background-color: #52d0c2!important;
+				}
+				.ui.inverted.green.segment{
+					background-color: #1bbc9b!important;
+				}
+				.ui.inverted.violet.segment{
+					background-color: #2c3e50!important;
+				}
+				.ui.inverted.blue.segment{
+					background-color: #2bb3dd!important; 
+				}
+	/*			.ui.inverted.yellow.segment{
+					background-color: rgb(222, 83, 83)!important;
+				}*/
+				.ui.inverted.grey.segment{
+					background-color: #95a5a6!important;
+				}
+				.ui.inverted.segment{
+					background-color: #292929!important;
+				}
+				.ui.vertical.stripe{
+					background-color: #f9f9f9!important;
+				}
+
+				.ui.header{
+					color: #2c3e50;
+				}
+
+				.quote.stripe.segment .grid .column.blue{
+					background-color: #3e5871!important;
+				}
+
+				.ui.card>.content>.header, .ui.cards>.card>.content>.header{
+					margin-bottom: 0px;
+				}
+				.ui.card>.content>.header+.description, .ui.card>.content>.meta+.description, .ui.cards>.card>.content>.header+.description, .ui.cards>.card>.content>.meta+.description{
+					margin-top: 0px;
+				}
+
+				.ui.huge.header{
+					font-size: 3em;
+				}
+				.ui.vertical.stripe.pricing {
+					padding: 3em 0em 7em;
+				}
+
+				body {
+			background-color: #1bbc9b;
+		}
+		body > .grid {
+			height: 100%;
+		}
+		.image {
+			margin-top: -100px;
+		}
+		.column {
+			max-width: 450px;
+		}
+				
+			</style>
+
+
+
+
+
+
+
+
+
+
+
 		{% endblock %}
 
 		{% block head_js %}
@@ -24,80 +188,28 @@
 		<!-- include riot.js and the compiler -->
 		<script src="https://cdn.jsdelivr.net/riot/3.2/riot+compiler.min.js"></script>
 
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+			<!-- semantic-ui js-->
+			<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+
 </head>
 <body>
 
-	<div class="main">
-
-		<header class="navbar">
-		  <section class="navbar-section">
-			<a href="#" class="navbar-brand mr-10">Spectre.css</a>
-			<a href="#" class="btn btn-link">Docs</a>
-			<a href="https://github.com/picturepan2/spectre" class="btn btn-link">GitHub</a>
-		  </section>
-		  <section class="navbar-section">
-			<div class="input-group input-inline">
-			  <input class="form-input" type="text" placeholder="search" />
-			  <button class="btn btn-primary input-group-btn">Search</button>
-			</div>
-		  </section>
-		</header>
-
-
-
-
-
-	</div>
 	
 
 
-				 <a href="/">index</a>
-				 <a href="/upload">file upload example</a>
-				 <a href="/crud">crud example</a>
-
-		<div id="content">{% block content %}{% endblock %}</div>
-		<div id="footer" class='text-center  show-sm'>
-
-		</div>
-
-
-		<!-- mount normally -->
-		<script type="riot/tag" src="{{ url_for('static', filename='tags/objects.tag') }}"></script>
-		<script type="riot/tag" src="{{ url_for('static', filename='tags/files.tag') }}"></script>
-
-		<script type="text/javascript">
-				var get_json = function(url, callback) {
-						var xhr = new XMLHttpRequest();
-						xhr.open('GET', url, true);
-						xhr.responseType = 'json';
-						xhr.onload = function() {
-							var status = xhr.status;
-							if (status == 200) {
-								callback(null, xhr.response);
-							} else {
-								callback(status);
-							}
-						};
-						xhr.send();
-				};
-
-				function compare_order(a,b) {
-					if (a.order < b.order)
-						return 1;
-					if (a.order > b.order)
-						return -1;
-					return 0;
-				}
-		</script>
-
-
-		{% block footer_js %}
-
-
-
-
-
+<div class="ui middle aligned center aligned grid">
+	<div class="column">
+		
+		
+		{% block content %}
 		{% endblock %}
+
+		
+	</div>
+</div>
+
 
 
 
