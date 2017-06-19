@@ -1,0 +1,15 @@
+.ui.menu{
+  border: none;
+  box-shadow: none;
+}
+
+.ui.menu .item{
+  border: none;
+}
+.ui.menu .item:before{
+  width: 0px;
+}
+
+.pusher .ui.menu, .pusher .ui.basic.segment, body.pushable>.pusher{
+   background-color:#eee;
+}
