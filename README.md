@@ -1,5 +1,5 @@
-# basic_bootstrap
-4/25/2017 - this years starterkit for tiny projects
+# the blog
+<!-- 4/25/2017 - this years starterkit for tiny projects
 
 currently using
 
@@ -23,7 +23,7 @@ flask-socketio
 https://github.com/miguelgrinberg/Flask-SocketIO
 
 flask-sse
-http://flask-sse.readthedocs.io/en/latest/
+http://flask-sse.readthedocs.io/en/latest/ -->
 
 <!-- flask-user
 http://pythonhosted.org/Flask-User/ -->
@@ -35,7 +35,7 @@ http://flask-themes2.readthedocs.io/en/latest/ -->
 https://pypi.python.org/pypi/Flask-Mail 
 this was included with flask-user-->
 
-flask-ask (amazon alexa)
+<!-- flask-ask (amazon alexa)
 http://flask-ask.readthedocs.io/en/latest/
 
 flask-classy
@@ -64,7 +64,7 @@ server config files provided in server folder. They follow these dgiital ocean s
 https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-14-04
 
 https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uwsgi-and-nginx-on-ubuntu-14-04
-
+ -->
 
 
 
