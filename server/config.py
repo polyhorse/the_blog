@@ -34,7 +34,7 @@ class Config(object):
 	USER_INVITE_ENDPOINT = ''
 	#flask-themes2 settings
 	THEME_PATHS = ['themes']
-	HOMEPAGE_THEME = 'homepage_theme'
+	HOMEPAGE_THEME = 'polyhorse_theme'
 	ADMIN_THEME = 'admin_theme'
 	MEMBER_THEME = 'member_theme'
 

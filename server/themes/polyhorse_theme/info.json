@@ -1,0 +1,9 @@
+{
+    "application": "app", 
+    "identifier": "polyhorse_theme", 
+    "name": "Homepage Theme", 
+    "author": "polyhorse",
+    "description": "Basic starterkit theme for anonymous visitors to the front page",
+    "license": "MIT/X11",
+    "version": "1.0"
+}
