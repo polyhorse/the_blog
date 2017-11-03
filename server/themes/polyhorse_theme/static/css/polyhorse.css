@@ -825,3 +825,7 @@ hr.yellow {
   border-color: #e6db74; }
 hr.gray {
   border-color: #75715e; }
+
+.particles-js-canvas-el{
+  position: absolute;
+}

@@ -78,7 +78,7 @@
 		<!-- Masthead -->
 		<header class="masthead" style="background-image: url('{{ theme_static('img/agency/backgrounds/bg-header.jpg') }}');">
 			<div class="container h-100">
-				<div class="row h-100">
+				<div class="row h-100" id="particles-js">
 					<div class="col-12 my-auto text-center text-white">
 						<img class="masthead-img img-fluid mb-3" src="{{ theme_static('img/polyhorse/profile.svg') }}" alt="">
 						<div class="masthead-title">polyhorse</div>
@@ -758,6 +758,15 @@
 		<!-- Custom scripts for this theme -->
 		<script src="{{ theme_static('js/vitality.js') }}"></script>
 		<script src="{{ theme_static('js/mixitup-config.js') }}"></script>
+
+		<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+		<script type="text/javascript">
+
+			/* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
+particlesJS.load('particles-js', '{{ theme_static("js/particles.json") }}', function() {
+  console.log('callback - particles.js config loaded');
+});
+		</script>
 
 	</body>
 
