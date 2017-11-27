@@ -4,6 +4,6 @@ server {
 
     location / {
         include proxy_params;
-        proxy_pass http://unix:/home/server/kiosk_prototype/server/server.sock;
+        proxy_pass http://unix:/home/server/the_blog/server/server.sock;
     }
 }
