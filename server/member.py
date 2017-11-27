@@ -12,3 +12,6 @@ class MemberView(FlaskView):
 
 	def index(self):
 		return render_theme_template(self.theme, 'index.html')
+
+def init_members(app):
+	MemberView.register(app)

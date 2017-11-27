@@ -34,9 +34,13 @@ class Config(object):
 	USER_INVITE_ENDPOINT = ''
 	#flask-themes2 settings
 	THEME_PATHS = ['themes']
+	DEFAULT_THEME = 'polyhorse_theme'
 	HOMEPAGE_THEME = 'polyhorse_theme'
 	ADMIN_THEME = 'admin_theme'
 	MEMBER_THEME = 'member_theme'
+	#flask-blogging settings
+
+
 
 # class ProductionConfig(Config):
 

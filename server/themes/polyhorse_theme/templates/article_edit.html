@@ -1,0 +1,165 @@
+{% extends theme('base.html') %}
+<!DOCTYPE html>
+
+
+	<body id='blog' {% block body_class %}class='blog'{% endblock %}>
+
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N2VW3RB"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+
+
+		{% block navigation %}
+			<nav class="navbar navbar-expand-lg fixed-top shrink-black editnav bgblack" id="mainNav">
+				<div class="container">
+					<a class="navbar-brand js-scroll-trigger" href="/">
+						<img class="img-fluid" src="{{ theme_static('img/polyhorse/logo.svg') }}" alt="">
+					</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+						<i class="fa fa-bars"></i>
+						Menu
+					</button>
+					<div class="collapse navbar-collapse" id="navbarResponsive">
+						<ul class="navbar-nav ml-auto">
+
+							{% for item in current_menu.children %}
+								<li class="nav-item">
+									{% if item.active %}
+										<span class="nav-link js-scroll-trigger active">{{item.text}}</span>
+									{% else %}
+										<a class="nav-link js-scroll-trigger" href="{{item.url}}">{{item.text}}</a>
+									{% endif %}
+									
+								</li>
+							{% endfor %}
+
+						</ul>
+					</div>
+				</div>
+			</nav>
+		{% endblock %}
+
+		{% block content%}
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<div class='container-fluid editnav'>
+				<div class='row'>
+
+					<div class='col-6' >
+						<form method="POST" action="/edit/{{article.url_headline}}" class='article-form'>
+							{% for field in form %}
+								{{field}}
+							{% endfor %}
+							<input type="submit" value="Go">
+						</form>
+					</div>
+
+					<div class='col-6'>
+						<div id='html_output'></div>
+					</div>
+
+				</div>
+
+				<!-- <main role='main'>
+					{% if article.featured_image != None %}
+						<img src="{{article.featured_image}}" width='100%'/>
+					{% endif %}
+
+					<ol class="list-unstyled">
+						{% for tag in article.tags %}
+							<li><a href="" class='tag'>{{tag.name}}</a></li>
+						{% endfor %}
+					</ol>
+
+					{{ article.copy|markdown }}
+				</main> -->
+			</div>
+
+
+
+
+
+		{% endblock %}
+
+
+		{% block footer %}
+		{% endblock %}
+
+	
+
+		{% block footer_js %}
+			<!-- Bootstrap core JavaScript -->
+			<script src="{{ theme_static('vendor/jquery/jquery.min.js') }}"></script>
+			<script src="{{ theme_static('vendor/popper/popper.min.js') }}"></script>
+			<script src="{{ theme_static('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+
+			<!-- Plugin JavaScript -->
+			<script src="{{ theme_static('vendor/jquery.easing/jquery.easing.min.js') }}"></script>
+			<script src="{{ theme_static('vendor/owl-carousel/owl.carousel.js') }}"></script>
+			<script src="{{ theme_static('vendor/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
+			<script src="{{ theme_static('vendor/vide/jquery.vide.min.js') }}"></script>
+			<script src="{{ theme_static('vendor/mixitup/mixitup.min.js') }}"></script>
+			<script src="{{ theme_static('vendor/wowjs/wow.min.js') }}"></script>
+
+			<!-- Contact form JavaScript -->
+			<script src="{{ theme_static('js/contact_me.js') }}"></script>
+			<script src="{{ theme_static('js/jqBootstrapValidation.js') }}"></script>
+
+			<!-- Custom scripts for this theme -->
+			<script src="{{ theme_static('js/vitality.js') }}"></script>
+			<script src="{{ theme_static('js/mixitup-config.js') }}"></script>
+
+			
+
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.7.1/remarkable.min.js"></script>
+
+			<script type="text/javascript">
+
+				
+				var md = new Remarkable();
+
+				function UpdateMarkup(){
+
+					var source = document.getElementById('copy');
+					var html= md.render(source.value);
+					var elem = document.getElementById('html_output');
+					elem.innerHTML = html;
+					Prism.highlightAll();
+					console.log(html);
+				}
+			
+
+				$(document).ready(function(){
+
+					UpdateMarkup();
+  					var source = document.getElementById('copy');
+  					source.addEventListener('input', function() {
+
+						UpdateMarkup();
+
+					}, false);
+
+				}); 
+
+
+
+
+			</script>
+
+		{% endblock %}
+
+	</body>
+

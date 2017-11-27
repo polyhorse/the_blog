@@ -6,23 +6,37 @@ import flask_restless
 from flask_migrate import Migrate
 from flask_user import login_required
 from flask_themes2 import Themes, render_theme_template, get_theme, get_themes_list
+from flask import Blueprint
+from flask_menu import Menu, register_menu
+from flask import render_template_string
+from flask_menu.classy import register_flaskview
+
+# from flaskext.markdown import Markdown
+from flask.ext.misaka import Misaka
 
 #########################################
 ################ INIT ###################
 #########################################
+
 def create_app():
 	#APP init
 	app = Flask(__name__)
 	app.config.from_object('config.DevelopmentConfig')
+
 	#THEMES init
 	Themes(app, app_identifier='app')
+
 	#MAIL init
 	from flask_mail import Mail
 	mail = Mail(app)
 	#DATABASE init
 	from models import db
 	db.init_app(app)
-	#MIGRATIONS init
+	#content, blog, tutorials
+	from content import init_content
+	init_content(app, db)
+
+	#MIGRATIONS
 	migrate = Migrate(app, db)
 	with app.app_context():
 		#User init
@@ -32,55 +46,62 @@ def create_app():
 		user_manager = UserManager(db_adapter, app)
 		#db finalization
 		db.create_all()
-	#API - is for IOT, or mobile
-	from models import DummyObject, DummyFile
-	manager = flask_restless.APIManager(app, flask_sqlalchemy_db=db)
-	manager.create_api(DummyObject)
-	manager.create_api(DummyFile)
-	#ADMIN - is for basic crud for trained users
-	from admin import admin
-	admin.init_app(app)
+
+	#admin
+	from admin import init_admin
+	init_admin(app, db)
 	#MEMBER VIEWS
-	from member import MemberView
-	MemberView.register(app)
-	#upload example
-	from flask_admin.contrib.fileadmin import FileAdmin
-	path = os.path.join(os.path.dirname(__file__), app.config['UPLOAD_FOLDER'])
-	admin.add_view(FileAdmin(path, '/uploads/', name='Uploads'))
-	#sqlmodel example
-	from flask_admin.contrib.sqla import ModelView
-	admin.add_view(ModelView(DummyObject, db.session))
-	#DASHBOARD - is for customer login pages
-	#I'll have to make that custom
-	return app, migrate
+	from member import init_members
+	init_members(app)
 
-app, migrate = create_app()
+	#we render markdown for the user on the server (cache will work better), but editors will get it rendered clientside
+	# Markdown(app)
+	Misaka(app, fenced_code=True)
+	
+
+	return app, migrate, db
+
+app, migrate, db = create_app()
 
 
-#########################################
-############## ROUTES ###################
-#########################################
-from models import DummyObject, DummyFile
+# bp = Blueprint('bp', __name__)
+# from content import ContentView
+# ContentView.register(bp)
+# register_flaskview(bp, ContentView)
+# @app.route('/')
+# @register_menu(app, '.', 'Home')
+# def index():
+# 	return render_template_string(
+#         """
+#         {%- for item in current_menu.children %}
+#             {% if item.active %}*{% endif %}{{ item.text }}
+#         {% endfor -%}
+#         """)
 
-############## INDEX ###################
-@app.route("/")
-def index():
-	dummy_objects = DummyObject.query.all()
-	dummy_files = DummyFile.query.all()
-	# print(dummy_objects)
-	# print(dummy_files)
-	return render_theme_template(get_current_theme(), 'index.html', dummy_objects=dummy_objects, dummy_files=dummy_files)
-	# return render_template('index.html', dummy_objects=dummy_objects, dummy_files=dummy_files)
+# @app.route('/sdfsdfsdf')
+# @register_menu(app, '.first', 'dsfd')
+# def index2():
+# 	return render_template_string(
+#         """
+#         {%- for item in current_menu.children %}
+#             {% if item.active %}*{% endif %}{{ item.text }}
+#         {% endfor -%}
+#         """)
 
-# ############## CRUD ###################
-# @app.route("/crud", methods=['GET', 'POST'])
-# def crud():
-# 	if request.method == 'POST':
-# 		#WTFORMS crud example
-# 		pass
-# 	#return this if get
-# 	dummy_objects = DummyObject.query.all()
-# 	return render_template('crud.html', dummy_objects=dummy_objects)
+
+#disables cache for testing and content updates
+@app.after_request
+def add_header(r):
+    """
+    Add headers to both force latest IE rendering engine or Chrome Frame,
+    and also to cache the rendered page for 10 minutes.
+    """
+    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    r.headers["Pragma"] = "no-cache"
+    r.headers["Expires"] = "0"
+    r.headers['Cache-Control'] = 'public, max-age=0'
+    return r
+
 
 ############## FILE UPLOAD ###################
 @app.route('/upload', methods=['GET', 'POST'])
@@ -139,13 +160,7 @@ def uploaded_file(filename):
 	return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 def get_current_theme():
-	# if g.user is not None:
-	# 	ident = g.user.theme
-	# else:
-	# 	ident = current_app.config.get('DEFAULT_THEME', 'plain')
 	themes = get_themes_list()
-	print 'here'
-	print themes
 	theme = app.config['HOMEPAGE_THEME']
 	return get_theme(theme)
 

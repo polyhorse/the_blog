@@ -1,0 +1,169 @@
+{% extends theme('base.html') %}
+<!DOCTYPE html>
+
+
+	<body id='blog' {% block body_class %}class='blog'{% endblock %}>
+
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N2VW3RB"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+
+
+		{% block navigation %}
+			<nav class="navbar navbar-expand-lg fixed-top shrink-blue" id="mainNav">
+				<div class="container">
+					<a class="navbar-brand js-scroll-trigger" href="/">
+						<img class="img-fluid" src="{{ theme_static('img/polyhorse/logo.svg') }}" alt="">
+					</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+						<i class="fa fa-bars"></i>
+						Menu
+					</button>
+					<div class="collapse navbar-collapse" id="navbarResponsive">
+						<ul class="navbar-nav ml-auto">
+
+
+							{% for item in current_menu.children %}
+								<li class="nav-item">
+									{% if item.active %}
+										<span class="nav-link js-scroll-trigger active">{{item.text}}</span>
+									{% else %}
+										<a class="nav-link js-scroll-trigger" href="{{item.url}}">{{item.text}}</a>
+									{% endif %}
+									
+								</li>
+							{% endfor %}
+
+						</ul>
+					</div>
+				</div>
+			</nav>
+		{% endblock %}
+
+		{% block content%}
+
+			<!-- HERO LOGO -->
+			<header class="masthead blog" >
+				<div class="container h-50">
+					<div class="row h-100" id="particles-js">
+						<div class='col-2'></div>
+						<div class="col-8 my-auto text-center text-white">
+							<div class="blog-header">
+								<div class="container">
+									<h1 class="blog-title">Blog</h1>
+									<p class="lead blog-description">Some stuff we think</p>
+								</div>
+							</div>
+						</div>
+						<div class='col-2'></div>
+					</div>
+				</div>
+			</header>
+
+
+
+
+			<main role="main" class="container blog">
+
+				<div class="row blog-main">
+
+					<div class="col-sm-8 blog-main">
+
+						<!-- BLOG POSTS -->
+						{% for article in articles %}
+							<div class="blog-post">
+								<a href="{{ url_for('ContentView:view_article', url_headline=article.url_headline) }}" class='black' ><h2 class="blog-post-title">{{ article.headline }}</h2></a>
+								<p class="blog-post-meta">{{ article.publish_date.strftime('%Y-%m-%d') }}</p>
+								<p>{{article.summary}}</p>
+							</div>
+						{% endfor %}
+
+						<nav class="blog-pagination" style='margin-bottom:4rem;'>
+							<a class="btn btn-primary red inverse" href="#">Older</a>
+							<a class="btn btn-primary red inverse disabled" href="#">Newer</a>
+						</nav>
+
+					</div><!-- /.blog-main -->
+
+
+
+
+					<!-- BLOG SIDEBAR -->
+					<aside class="col-sm-3 ml-sm-auto blog-sidebar">
+						<div class="sidebar-module sidebar-module-inset">
+							<h4>About</h4>
+							<p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+						</div>
+						<div class="sidebar-module recent_posts">
+							<h4>Recent Posts</h4>
+							<ol class="list-unstyled">
+								{% for post in recent_posts %}
+									<li><a href="">{{post.headline}}</a></li>
+								{% endfor %}
+							</ol>
+						</div>
+						<div class='sidebar-module'>
+							<h4>Tags</h4>
+							<ol class="list-unstyled">
+								{% for tag in tags %}
+									<li><a href="" class='tag'>{{tag.name}}</a></li>
+								{% endfor %}
+							</ol>
+						</div>
+						<div class="sidebar-module">
+							<h4>Elsewhere</h4>
+							<ol class="list-unstyled">
+								<li><a href="#">GitHub</a></li>
+								<li><a href="#">Twitter</a></li>
+								<li><a href="#">Facebook</a></li>
+							</ol>
+						</div>
+					</aside><!-- /.blog-sidebar -->
+
+				</div><!-- /.row -->
+
+			</main><!-- /.container -->
+
+		{% endblock %}
+
+
+		{% block footer %}
+			{{super()}}
+		{% endblock %}
+
+	
+
+		{% block footer_js %}
+			<!-- Bootstrap core JavaScript -->
+			<script src="{{ theme_static('vendor/jquery/jquery.min.js') }}"></script>
+			<script src="{{ theme_static('vendor/popper/popper.min.js') }}"></script>
+			<script src="{{ theme_static('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+
+			<!-- Plugin JavaScript -->
+			<script src="{{ theme_static('vendor/jquery.easing/jquery.easing.min.js') }}"></script>
+			<script src="{{ theme_static('vendor/owl-carousel/owl.carousel.js') }}"></script>
+			<script src="{{ theme_static('vendor/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
+			<script src="{{ theme_static('vendor/vide/jquery.vide.min.js') }}"></script>
+			<script src="{{ theme_static('vendor/mixitup/mixitup.min.js') }}"></script>
+			<script src="{{ theme_static('vendor/wowjs/wow.min.js') }}"></script>
+
+			<!-- Contact form JavaScript -->
+			<script src="{{ theme_static('js/contact_me.js') }}"></script>
+			<script src="{{ theme_static('js/jqBootstrapValidation.js') }}"></script>
+
+			<!-- Custom scripts for this theme -->
+			<script src="{{ theme_static('js/vitality.js') }}"></script>
+			<script src="{{ theme_static('js/mixitup-config.js') }}"></script>
+
+			<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+			<script type="text/javascript">
+				/* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
+				particlesJS.load('particles-js', '{{ theme_static("js/particles.json") }}', function() {
+					console.log('callback - particles.js config loaded');
+				});
+			</script>
+		{% endblock %}
+
+	</body>
+

@@ -58,13 +58,13 @@ http://pythonhosted.org/Flask-Uploads/
 
 flask-menu
 http://flask-menu.readthedocs.io/en/stable/
-
+ -->
 
 server config files provided in server folder. They follow these dgiital ocean setup guides:
 https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-14-04
 
 https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uwsgi-and-nginx-on-ubuntu-14-04
- -->
+
 
 
 

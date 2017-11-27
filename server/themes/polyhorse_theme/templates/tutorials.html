@@ -1,0 +1,119 @@
+{% extends theme('base.html') %}
+<!DOCTYPE html>
+
+
+	<body id='blog'  {% block body_class %}class='blog'{% endblock %}>
+
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N2VW3RB"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+
+
+		{% block navigation %}
+			<nav class="navbar navbar-expand-lg fixed-top shrink-red" id="mainNav">
+				<div class="container">
+					<a class="navbar-brand js-scroll-trigger" href="/">
+						<img class="img-fluid" src="{{ theme_static('img/polyhorse/logo.svg') }}" alt="">
+					</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+						<i class="fa fa-bars"></i>
+						Menu
+					</button>
+					<div class="collapse navbar-collapse" id="navbarResponsive">
+						<ul class="navbar-nav ml-auto">
+
+
+							{% for item in current_menu.children %}
+								<li class="nav-item">
+									{% if item.active %}
+										<span class="nav-link js-scroll-trigger active">{{item.text}}</span>
+									{% else %}
+										<a class="nav-link js-scroll-trigger" href="{{item.url}}">{{item.text}}</a>
+									{% endif %}
+									
+								</li>
+							{% endfor %}
+
+						</ul>
+					</div>
+				</div>
+			</nav>
+		{% endblock %}
+
+		{% block content%}
+
+			<!-- HERO LOGO -->
+			<header class="masthead tutorials" >
+				<div class="container h-50">
+					<div class="row h-100" id="particles-js">
+						<div class='col-2'></div>
+						<div class="col-8 my-auto text-center text-white">
+							<div class="blog-header">
+				        <div class="container">
+				          <h1 class="blog-title">Free Advice</h1>
+				          <p class="lead blog-description">Worth Every Penny</p>
+				        </div>
+				      </div>
+						</div>
+						<div class='col-2'></div>
+					</div>
+				</div>
+			</header>
+
+			<main role="main" class="container tutorials" style='padding-top:100px'>
+				
+				{% for article in articles %}
+
+					<a href="{{ url_for('ContentView:view_article', url_headline=article.url_headline) }}" class='row'>
+				<section class='container-fluid' style='margin:0px;'>
+					<img src="{{article.featured_image}}">
+					<h3>{{article.headline}}</h3>
+					<p>{{article.summary}}</p>
+					<p class='purple'><strong>{% if article.publish_date %}{{article.publish_date.strftime('%Y-%m-%d')}}{%endif%}</strong></p>
+				</section></a>
+				{% endfor %}
+				
+			</main>
+		{% endblock %}
+
+
+		{% block footer %}
+			{{super()}}
+		{% endblock %}
+
+	
+
+		{% block footer_js %}
+			<!-- Bootstrap core JavaScript -->
+			<script src="{{ theme_static('vendor/jquery/jquery.min.js') }}"></script>
+			<script src="{{ theme_static('vendor/popper/popper.min.js') }}"></script>
+			<script src="{{ theme_static('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+
+			<!-- Plugin JavaScript -->
+			<script src="{{ theme_static('vendor/jquery.easing/jquery.easing.min.js') }}"></script>
+			<script src="{{ theme_static('vendor/owl-carousel/owl.carousel.js') }}"></script>
+			<script src="{{ theme_static('vendor/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
+			<script src="{{ theme_static('vendor/vide/jquery.vide.min.js') }}"></script>
+			<script src="{{ theme_static('vendor/mixitup/mixitup.min.js') }}"></script>
+			<script src="{{ theme_static('vendor/wowjs/wow.min.js') }}"></script>
+
+			<!-- Contact form JavaScript -->
+			<script src="{{ theme_static('js/contact_me.js') }}"></script>
+			<script src="{{ theme_static('js/jqBootstrapValidation.js') }}"></script>
+
+			<!-- Custom scripts for this theme -->
+			<script src="{{ theme_static('js/vitality.js') }}"></script>
+			<script src="{{ theme_static('js/mixitup-config.js') }}"></script>
+
+			<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+			<script type="text/javascript">
+				/* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
+				particlesJS.load('particles-js', '{{ theme_static("js/particles.json") }}', function() {
+				  console.log('callback - particles.js config loaded');
+				});
+			</script>
+		{% endblock %}
+
+	</body>
+
