@@ -1,6 +1,6 @@
 server {
     listen 80;
-    server_name 165.227.53.2;
+    server_name polyhorse.com;
 
     location / {
         include proxy_params;
